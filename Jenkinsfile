@@ -11,7 +11,7 @@ pipeline {
                 sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
             }
         }
-        stage('Sync Mirror Repo') {
+        stage('Sync Mirror') {
             steps {
                 echo 'Sync Mirror Repo'
                 dir("${MIRROR_PATH}") {
