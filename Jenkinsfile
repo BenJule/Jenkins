@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         MIRROR_PATH             = '/mnt/e/los-mirror/LineageOS/android.git'
-        BUILD_PATH              = '/home/lineageos/android/lineage'
     }
     stages {
         stage('Get Repo') {
