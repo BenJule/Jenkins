@@ -21,23 +21,88 @@ pipeline {
                 }
             }
         }
-        stage('Code syncing') {
+        stage('Repo syncing') {
+            agent {
+                label 'master'
+            }            
+            steps {
+                echo 'Repo syncing'
+                dir("${BUILD_PATH}") {
+                    sh '''#!/bin/bash\nset -x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
+                }
+            }
+        }
+        stage('Device syncing') {
             agent {
                 label 'master'
             }            
             steps {
                 echo 'Code syncing'
                 dir("${BUILD_PATH}") {
-                    sh '''#!/bin/bash\nset -x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
+                    /* android_device_samsung_jfltexx */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+                    extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'device/samsung/jfltexx']],
+					userRemoteConfigs: [[url: 'https://github.com/los-legacy/android_device_samsung_jfltexx.git']]
+					])
+                    
+                    /* android_device_samsung_jf-common */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+                    extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'device/samsung/jf-common']],                              
+					userRemoteConfigs: [[url: 'https://github.com/los-legacy/android_device_samsung_jf-common.git']]
+					])
+                    
+                    /* android_device_samsung_qcom-common */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'device/samsung/qcom-common']],
+					userRemoteConfigs: [[url: 'https://github.com/LineageOS/android_device_samsung_qcom-common.git']]
+					])
+                    
+                    /* android_device_qcom_common */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'device/qcom/common']],
+					userRemoteConfigs: [[url: 'https://github.com/LineageOS/android_device_qcom_common.git']]
+					])
+                    
+                    /* android_hardware_samsung */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'hardware/samsung']],
+					userRemoteConfigs: [[url: 'https://github.com/LineageOS/android_hardware_samsung.git']]
+					])
+                    
+                    /* proprietary_vendor_samsung_jf */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'vendor/samsung']],
+					userRemoteConfigs: [[url: 'https://github.com/los-legacy/proprietary_vendor_samsung_jf.git']]
+					])
+                    
+                    /* android_kernel_samsung_jf */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'kernel/samsung/jf']],
+					userRemoteConfigs: [[url: 'https://github.com/los-legacy/android_kernel_samsung_jf.git']]
+					])
+                    
+                    /* android_packages_resources_devicesettings */
+                    checkout([$class: 'GitSCM',
+					branches: [[name: 'origin/lineage-15.1']],
+					extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'packages/resources/devicesettings']],
+					userRemoteConfigs: [[url: 'https://github.com/LineageOS/android_packages_resources_devicesettings.git']]
+					])
                 }
-            }
-        }
-        stage('Syncing Dev') {
-            agent {
-                label 'jfltexx'
-            }
-            steps {
-                sh 'echo from jfltexx'
             }
         }
         stage('Syncing Kernel') {
