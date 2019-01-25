@@ -1,9 +1,19 @@
 pipeline {
     agent none
+    environment {
+        MIRROR_PATH             = '/mnt/e/los-mirror/LineageOS/android.git'
+        BUILD_PATH              = '/home/lineageos/android/lineage'
+    }        
     stages {
         stage('Prepare/Checkout') {
             steps {
-                echo "I don't need no node"
+                dir("${BUILD_PATH}") {
+                    sh("pwd")
+                    sh 'mkdir -p ~/bin'
+                    sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
+                    sh '''#!/bin/bash\nset -x\nsource ~/.profile\nrepo init -u ${MIRROR_PATH} -b ${BRANCH}'''
+                    sh 'repo init -u ${MIRROR_PATH} -b ${BRANCH}'
+                }
             }
         }
         stage('Syncing Repo') {
