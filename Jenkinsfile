@@ -23,5 +23,13 @@ pipeline {
                 sh 'echo from jfltexx'
             }
         }
+        stage('Syncing Kernel') {
+            agent {
+                label 'jfltexx'
+            }
+            steps {
+                sh 'echo from jfltexx'
+            }
+        }
     }
 }
