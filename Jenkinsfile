@@ -10,10 +10,8 @@ pipeline {
         ANDROID_JACK_VM_ARGS    =  '-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G'        
     }        
     stages {
-        stage('Prepare/Checkout') {
-            agent {
-                 label 'android'
-            }
+        stage('Preparation') {
+            agent any
             steps {
                 dir("${BUILD_PATH}") {
                     sh("pwd")
