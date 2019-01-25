@@ -20,7 +20,7 @@ pipeline {
                 label 'android'
             }
             steps {
-                sh './deploy-code-here'
+                sh 'echo from android'
             }
         }
     }
