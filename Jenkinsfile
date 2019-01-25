@@ -17,8 +17,7 @@ pipeline {
             steps {
                 echo 'Sync Mirror Repo'
                 dir("${MIRROR_PATH}") {
-                sh 'repo sync -f --force-sync --force-broken --no-clone-bundle -j$(nproc --all)'
-                }
+                sh '''#!/bin/bash\nset +x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''               }
             }
         }
     }
