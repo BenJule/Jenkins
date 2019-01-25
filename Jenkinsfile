@@ -229,7 +229,7 @@ node('builder') {
         currentBuild.description = env.BUILD_PRODUCT+'_'+env.DEVICE+'-'+env.BRANCH
         stage('Preparation') {
             echo 'Setting up environment...'
-            env.WORKSPACE = '/unlegacy'
+            env.WORKSPACE = '/home/lineageos/android/lineage'
             env.SOURCE_DIR = env.WORKSPACE + '/' + env.BRANCH
             env.ARCHIVE_DIR = env.WORKSPACE + '/archive'
             env.INCOMING_TMP_DIR = '/tmp/incoming/'
@@ -316,11 +316,15 @@ node('builder') {
         }
         cleanUp()
         currentBuild.result = 'SUCCESS'
+        /*
         slackSend (color: 'good', message: "Jenkins Builder - Job SUCCESS: '${env.JOB_NAME} [${env.BUILD_NUMBER} - ${currentBuild.description}]' (${env.BUILD_URL})")
+        */
     } catch (Exception e) {
         try { cleanUp() } catch (Exception ex) { }
         currentBuild.result = 'FAILURE'
+        /*
         slackSend (color: 'danger', message: "Jenkins Builder - Job FAILED: '${env.JOB_NAME} [${env.BUILD_NUMBER} - ${currentBuild.description}]' (${env.BUILD_URL})")
+        */
     }
     echo "RESULT: ${currentBuild.result}"
 }
