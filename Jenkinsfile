@@ -19,8 +19,7 @@ pipeline {
                     sh("pwd")
                     sh 'mkdir -p ~/bin'
                     sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
-                    sh '''#!/bin/bash\nset -x\nsource ~/.profile\nrepo init -u ${MIRROR_PATH} -b ${BRANCH}'''
-                    sh '''#!/bin/bash\nset +x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
+                    sh '''#!/bin/bash\nset -x\nsource ~/.profile\nrepo init -u ${MIRROR_PATH} -b ${BRANCH}\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
                 }
             }
         }
