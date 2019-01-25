@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('say hi') {
+        stage('Prepare/Checkout') {
             steps {
                 echo "I don't need no node"
             }
