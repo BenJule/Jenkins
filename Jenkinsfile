@@ -15,7 +15,7 @@ pipeline {
                 sh 'echo from master'
             }
         }
-        stage('Syncing Device') {
+        stage('Syncing Dev') {
             agent {
                 label 'jfltexx'
             }
