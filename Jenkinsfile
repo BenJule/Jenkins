@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'android'
+        label 'master'
     }
     environment {
         MIRROR_PATH             = '/mnt/e/los-mirror/LineageOS/android.git'
