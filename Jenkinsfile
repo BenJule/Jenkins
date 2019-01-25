@@ -229,7 +229,7 @@ node('builder') {
         currentBuild.description = env.BUILD_PRODUCT+'_'+env.DEVICE+'-'+env.BRANCH
         stage('Preparation') {
             echo 'Setting up environment...'
-            env.WORKSPACE = '/unlegacy'
+            env.WORKSPACE = '/home/lineageos/android/lineage'
             env.SOURCE_DIR = env.WORKSPACE + '/' + env.BRANCH
             env.ARCHIVE_DIR = env.WORKSPACE + '/archive'
             env.INCOMING_TMP_DIR = '/tmp/incoming/'
