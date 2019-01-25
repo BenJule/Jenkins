@@ -6,6 +6,9 @@ pipeline {
     }        
     stages {
         stage('Prepare/Checkout') {
+            agent {
+                 label 'android'
+            }
             steps {
                 dir("${BUILD_PATH}") {
                     sh("pwd")
