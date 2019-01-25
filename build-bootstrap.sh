@@ -6,7 +6,7 @@ JENKINS_ANDROID_JOB="$JENKINS_URL/job/android/buildWithParameters?token=$JENKINS
 WEEK_DAY=$(date +%u)    # day of the week (1..7); 1 is Monday
 MONTH_DAY=$(date +%d)   # day of the month; (01..NN)
 
-curl -s https://raw.githubusercontent.com/Unlegacy-Android/build_config/master/build-targets > build-targets
+curl -s https://raw.githubusercontent.com/BenJule/Jenkins/build_config/build-targets > build-targets
 
 function process_line {
   LINE=$1
