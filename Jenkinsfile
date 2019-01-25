@@ -6,21 +6,21 @@ pipeline {
                 echo "I don't need no node"
             }
         }
-        stage('build') {
+        stage('Syncing Repo') {
              agent {
-                 label 'master'
+                 label 'android'
              }
              steps {   
                 checkout scm
                 sh 'echo from master'
             }
         }
-        stage('deploy') {
+        stage('Syncing Device') {
             agent {
-                label 'android'
+                label 'jfltexx'
             }
             steps {
-                sh 'echo from android'
+                sh 'echo from jfltexx'
             }
         }
     }
