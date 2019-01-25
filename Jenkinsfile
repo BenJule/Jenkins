@@ -22,6 +22,9 @@ pipeline {
             }
         }
         stage('Code syncing') {
+            agent {
+                label 'master'
+            }            
             steps {
                 echo 'Code syncing'
                 dir("${BUILD_PATH}") {
