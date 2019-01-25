@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('Device syncing') {
+        stage('Dev syncing') {
             agent {
                 label 'master'
             }            
