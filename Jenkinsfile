@@ -105,13 +105,37 @@ pipeline {
                 }
             }
         }
-        stage('Syncing Kernel') {
+        stage('Build process') {
             agent {
-                label 'jfltexx'
+                label 'build'
             }
             steps {
-                sh 'echo from jfltexx'
+                sh 'echo from build'
             }
         }
+        stage('OTA Package') {
+            agent {
+                label 'build'
+            }
+            steps {
+                sh 'echo from build'
+            }
+        }
+        stage('Archiving') {
+            agent {
+                label 'build'
+            }
+            steps {
+                sh 'echo from build'
+            }
+        }	    
+        stage('Publishing') {
+            agent {
+                label 'build'
+            }
+            steps {
+                sh 'echo from build'
+            }
+        }	    
     }
 }
